@@ -1,0 +1,1092 @@
+{% comment %} Zentro Works — Complete Homepage (single section). Real product images pulled via Liquid. {% endcomment %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1a1a1c; --bg-elev: #232325; --bg-card: #202022;
+  --border: #313134; --border-light: #3a3a3d;
+  --gold: #D4AF5F; --gold-deep: #B8912F; --gold-bright: #D4B670;
+  --cream: #F2F0EA; --text: #B8B3A5; --muted: #8a8578;
+}
+.zentro-home h1, .zentro-home h2, .zentro-home h3, .zentro-home .section-title, .zentro-home .brand-name, .zentro-home .card-name, .zentro-home .quote-text { font-family: 'Syne', sans-serif !important; }
+.zentro-home { background: var(--bg); font-family: 'Space Grotesk', sans-serif; color: var(--cream); overflow-x: hidden; line-height: 1.6; }
+
+/* Scroll reveal — varied directions */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); }
+.reveal-left.in { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); }
+.reveal-right.in { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); }
+.reveal-scale.in { opacity: 1; transform: scale(1); }
+/* Staggered children */
+.stagger > * { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.stagger.in > * { opacity: 1; transform: translateY(0); }
+.stagger.in > *:nth-child(1){transition-delay:.05s}.stagger.in > *:nth-child(2){transition-delay:.15s}
+.stagger.in > *:nth-child(3){transition-delay:.25s}.stagger.in > *:nth-child(4){transition-delay:.35s}
+.stagger.in > *:nth-child(5){transition-delay:.45s}.stagger.in > *:nth-child(6){transition-delay:.55s}
+
+
+
+/* ===== SECTION 1: HERO HEADER ===== */
+.hero-header { padding: 50px 5vw 28px; text-align: center; }
+.logo-wrap { display: inline-flex; align-items: center; gap: 26px; margin-bottom: 14px; }
+.zentro-logo { width: 78px; height: 94px; color: var(--gold-deep); animation: bulb-breathe 5s ease-in-out infinite; }
+@keyframes bulb-breathe {
+  0%,100% { filter: drop-shadow(0 0 4px rgba(201,169,97,0.25)); }
+  50% { filter: drop-shadow(0 0 16px rgba(201,169,97,0.75)); }
+}
+/* Rays glow together, gently, in sync with the bulb — no flicker */
+.zentro-logo .ray { animation: ray-glow 5s ease-in-out infinite; transform-origin: center; }
+@keyframes ray-glow {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.zentro-logo .filament-z { animation: filament-heat 5s ease-in-out infinite; }
+@keyframes filament-heat {
+  0%,100% { opacity: 0.55; }
+  50% { opacity: 1; filter: drop-shadow(0 0 4px rgba(201,169,97,0.8)); }
+}
+.brand-name { font-family: 'Syne', sans-serif; font-size: clamp(42px,6vw,82px); font-weight: 700; letter-spacing: clamp(1px,0.3vw,4px); color: var(--cream); line-height: 1; }
+.brand-name .z-anim {
+  display: inline-block;
+  color: var(--gold-deep);
+  animation: z-dropspin 4s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes z-dropspin {
+  0%   { transform: translateY(-70px) rotate(-180deg); opacity: 0; }
+  20%  { transform: translateY(0) rotate(0deg); opacity: 1; }
+  26%  { transform: translateY(-12px) rotate(8deg); }
+  32%  { transform: translateY(0) rotate(0deg); }
+  85%  { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-70px) rotate(180deg); opacity: 0; }
+}
+.brand-name .reg {
+  font-size: 0.28em;
+  vertical-align: super;
+  color: var(--gold);
+  font-weight: 400;
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+.brand-slogan { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: clamp(12px,1.2vw,15px); color: var(--gold); letter-spacing: 6px; margin-top: 14px; text-transform: uppercase; }
+.brand-divider { width: 50px; height: 1px; background: var(--gold); margin: 20px auto 0; }
+@media (max-width:700px){ .logo-wrap{flex-direction:column;gap:14px} .zentro-logo{width:62px;height:74px} }
+
+
+
+/* ===== HERO PRODUCT SLIDER (image-first, fills first screen) ===== */
+.hero-slider-section { padding: 10px 3vw 40px; }
+.hero-slider {
+  max-width: 1750px; margin: 0 auto;
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+}
+.hs-track { display: flex; transition: transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.hero-slider { --hs-h: clamp(460px, 68vh, 680px); }
+.hs-slide {
+  min-width: 100%; flex: 0 0 100%; max-width: 100%;
+  position: relative;
+  height: var(--hs-h);
+  display: block; text-decoration: none; color: inherit;
+  overflow: hidden;
+}
+.zentro-home .hs-slide, .zentro-home .hs-slide:hover { text-decoration: none !important; color: inherit; }
+/* Blurred copy of the same photo fills the wide banner; the product photo itself is shown whole, never cropped */
+.hs-bg { position: absolute; inset: -60px; background-size: cover; background-position: center; filter: blur(36px) brightness(0.36) saturate(1.1); transform: scale(1.06); }
+.hs-inner { position: relative; z-index: 1; height: 100%; max-width: 1500px; margin: 0 auto; padding: 0 8vw; display: grid; grid-template-columns: minmax(0,1fr) auto; grid-template-rows: 100%; align-items: center; gap: 5vw; box-sizing: border-box; }
+.hs-copy { max-width: 540px; }
+.hs-eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; font-weight: 500; }
+.zentro-home .hs-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(34px, 4.2vw, 62px); line-height: 1.05; letter-spacing: 0.5px; color: var(--cream); margin: 0 0 18px; text-transform: none; }
+.hs-price { font-size: 19px; color: var(--cream); letter-spacing: 1px; margin-bottom: 30px; font-weight: 500; }
+.hs-from { color: var(--text); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-right: 10px; font-weight: 400; }
+.zentro-home .hs-price s { color: var(--muted); margin-left: 12px; font-size: 15px; font-weight: 400; text-decoration: line-through !important; }
+.hs-off { display: inline-block; margin-left: 12px; padding: 4px 9px; background: var(--gold); color: var(--bg); font-size: 11px; letter-spacing: 2px; font-weight: 600; vertical-align: middle; }
+.hs-cta { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--gold); color: var(--gold); padding: 15px 30px; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; font-weight: 500; transition: all 0.3s; }
+.hs-slide:hover .hs-cta { background: var(--gold); color: var(--bg); }
+.hs-media { height: var(--hs-h); padding: 30px 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+.hs-media img { height: 100%; width: auto; max-width: 44vw; object-fit: contain; display: block; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+/* Preview placeholder (real image replaces this in Shopify) */
+.hs-ph {
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 60% 40%, #2a2a2d, var(--bg-card));
+  display: flex; align-items: center; justify-content: center;
+}
+.hs-ph svg { width: 200px; height: 200px; color: var(--gold); opacity: 0.35; }
+
+/* Arrows */
+.hs-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; background: rgba(26,26,28,0.65);
+  border: 1px solid var(--border-light); color: var(--gold);
+  cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.hs-arrow:hover { background: var(--gold); color: var(--bg); }
+.hs-arrow.prev { left: 18px; } .hs-arrow.next { right: 18px; }
+.hs-arrow svg { width: 20px; height: 20px; }
+/* Dots */
+.hs-dots { position: absolute; bottom: 22px; right: 30px; display: flex; gap: 9px; z-index: 5; }
+.hs-dot { width: 30px; height: 3px; background: rgba(232,228,217,0.28); cursor: pointer; border: none; padding: 0; transition: all 0.3s; }
+.hs-dot.active { background: var(--gold); }
+@media (max-width: 900px) {
+  .hs-slide { height: auto; }
+  .hs-inner { grid-template-columns: 1fr; grid-template-rows: auto auto; padding: 22px 6vw 62px; gap: 18px; text-align: center; }
+  .hs-media { order: -1; height: 56vh; padding: 0; }
+  .hs-media img { max-width: 100%; }
+  .hs-copy { max-width: none; }
+  .zentro-home .hs-name { font-size: 30px; margin-bottom: 10px; }
+  .hs-eyebrow { margin-bottom: 10px; }
+  .hs-price { margin-bottom: 18px; font-size: 17px; }
+  .hs-cta { padding: 13px 24px; font-size: 11px; letter-spacing: 3px; }
+  .hs-arrow { top: 28vh; }
+  .hs-dots { right: 50%; transform: translateX(50%); bottom: 24px; }
+}
+
+/* ===== SECTION 2: PRINTER + QUOTE ===== */
+.printer-quote { padding: 28px 5vw 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1600px; margin: 0 auto; }
+.stage { position: relative; width: 100%; max-width: 500px; height: 460px; margin: 0 auto; }
+.printer { position: absolute; inset: 0; opacity: 0; animation: pa 18s ease-in-out infinite; }
+@keyframes pa { 0%{opacity:0} 8%{opacity:.95} 92%{opacity:.95} 100%{opacity:0} }
+.printer svg { width: 100%; height: 100%; }
+.pf { stroke: var(--gold); fill: none; stroke-width: 0.5; stroke-linecap: round; }
+.pf.thin { stroke-width: 0.3; opacity: 0.6; }
+.ph { transform-origin: center; animation: hm 18s linear infinite; }
+@keyframes hm {
+  0%{transform:translate(-22px,49px)}3.5%{transform:translate(22px,49px)}4%{transform:translate(22px,45px)}7.5%{transform:translate(-22px,45px)}8%{transform:translate(-22px,41px)}11.5%{transform:translate(22px,41px)}12%{transform:translate(22px,37px)}15.5%{transform:translate(-22px,37px)}16%{transform:translate(-22px,33px)}19.5%{transform:translate(22px,33px)}20%{transform:translate(22px,29px)}23.5%{transform:translate(-22px,29px)}24%{transform:translate(-22px,25px)}27.5%{transform:translate(22px,25px)}28%{transform:translate(22px,21px)}31.5%{transform:translate(-22px,21px)}32%{transform:translate(-22px,17px)}35.5%{transform:translate(22px,17px)}36%{transform:translate(22px,13px)}39.5%{transform:translate(-22px,13px)}40%{transform:translate(-22px,9px)}43.5%{transform:translate(22px,9px)}44%{transform:translate(22px,5px)}47.5%{transform:translate(-22px,5px)}48%{transform:translate(-22px,1px)}51.5%{transform:translate(22px,1px)}52%,88%{transform:translate(22px,1px)}95%,100%{transform:translate(-30px,-3px)}
+}
+.ng { fill: var(--gold); animation: gp 0.4s ease-in-out infinite; }
+@keyframes gp { 0%,100%{opacity:1}50%{opacity:.6} }
+.bl { fill: none; stroke: var(--gold); stroke-width: 0.5; opacity: 0; }
+.l1{animation:la1 18s ease-in-out infinite}.l2{animation:la2 18s ease-in-out infinite}.l3{animation:la3 18s ease-in-out infinite}.l4{animation:la4 18s ease-in-out infinite}.l5{animation:la5 18s ease-in-out infinite}.l6{animation:la6 18s ease-in-out infinite}.l7{animation:la7 18s ease-in-out infinite}.l8{animation:la8 18s ease-in-out infinite}.l9{animation:la9 18s ease-in-out infinite}.l10{animation:la10 18s ease-in-out infinite}.l11{animation:la11 18s ease-in-out infinite}.l12{animation:la12 18s ease-in-out infinite}.l13{animation:la13 18s ease-in-out infinite}
+@keyframes la1{0%,2%{opacity:0}4%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la2{0%,6%{opacity:0}8%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la3{0%,10%{opacity:0}12%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la4{0%,14%{opacity:0}16%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la5{0%,18%{opacity:0}20%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la6{0%,22%{opacity:0}24%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la7{0%,26%{opacity:0}28%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la8{0%,30%{opacity:0}32%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la9{0%,34%{opacity:0}36%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la10{0%,38%{opacity:0}40%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la11{0%,42%{opacity:0}44%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la12{0%,46%{opacity:0}48%,88%{opacity:.9}92%,100%{opacity:0}}@keyframes la13{0%,50%{opacity:0}52%,88%{opacity:.9}92%,100%{opacity:0}}
+.status { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); animation: sp 18s ease-in-out infinite; }
+@keyframes sp { 0%,5%{opacity:0}10%,88%{opacity:.8}92%,100%{opacity:0} }
+.status::before { content: '●  '; }
+.quote-block { padding: 0 10px; }
+.quote-mark { font-family: 'Syne', sans-serif; font-size: 110px; line-height: 0.5; color: var(--gold); display: block; height: 50px; margin-bottom: -16px; opacity: 0.5; }
+.quote-text { font-family: 'Syne', sans-serif; font-style: normal; font-weight: 600; font-size: clamp(26px,2.9vw,42px); line-height: 1.3; letter-spacing: -0.5px; color: var(--cream); }
+.quote-text em { color: var(--gold); font-weight: 600; font-style: normal; }
+.quote-attribution { margin-top: 24px; display: flex; align-items: center; gap: 14px; }
+.quote-attribution-line { width: 28px; height: 1px; background: var(--gold); }
+.quote-attribution-text { font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+@media (max-width:900px){ .printer-quote{grid-template-columns:1fr;gap:24px;padding:16px 24px 50px} .stage{height:340px} .quote-block{text-align:center;padding:0} .quote-attribution{justify-content:center} }
+
+/* ===== SHARED ===== */
+.section { padding: 70px 5vw; }
+.section-header { text-align: center; margin-bottom: 50px; }
+.section-eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; font-weight: 500; }
+.section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(32px,3.6vw,50px); letter-spacing: 2px; text-transform: uppercase; color: var(--cream); }
+.section-divider { width: 44px; height: 1px; background: var(--gold); margin: 20px auto 0; }
+
+/* ===== SECTION 3: PRODUCTS (3+2) ===== */
+.products-grid { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: repeat(6,1fr); gap: 22px; }
+.products-grid .card { grid-column: span 2; }
+.products-grid .card:nth-child(4) { grid-column: 2 / span 2; }
+.products-grid .card:nth-child(5) { grid-column: 4 / span 2; }
+.card { background: var(--bg-card); border: 1px solid var(--border); padding: 42px 26px; text-align: center; text-decoration: none; color: inherit; display: block; transition: all 0.4s ease; cursor: pointer; }
+.card:hover { border-color: var(--gold); background: #28282b; transform: translateY(-5px); }
+.card-icon { margin-bottom: 22px; display: flex; justify-content: center; }
+.card-icon svg { width: 46px; height: 46px; color: var(--gold); }
+.card-name { font-family: 'Syne', sans-serif; font-size: 24px; letter-spacing: 1px; color: var(--cream); margin: 0 0 12px; font-weight: 700; text-transform: none; }
+.card-desc { font-size: 15px; color: var(--text); line-height: 1.65; margin: 0 0 20px; min-height: 70px; }
+.card-cta { font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; font-weight: 500; }
+.card-cta .arrow { display: inline-block; transition: transform 0.3s; }
+.card:hover .arrow { transform: translateX(6px); }
+@media (min-width:1025px){ .products-grid.cards-4{grid-template-columns:repeat(4,1fr)} .products-grid.cards-4 .card{grid-column:span 1} }
+@media (max-width:1024px){ .products-grid{grid-template-columns:repeat(2,1fr)} .products-grid .card{grid-column:span 1 !important} }
+@media (max-width:600px){ .products-grid{grid-template-columns:1fr} }
+
+/* ===== SECTION 4: WHY ===== */
+.why { padding: 70px 5vw; background: #161618; }
+.why-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
+.why-card { text-align: center; padding: 24px 20px; }
+.why-icon-wrap { width: 68px; height: 68px; margin: 0 auto 22px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.4s; }
+.why-card:hover .why-icon-wrap { background: var(--gold); transform: rotate(360deg); }
+.why-card:hover .why-icon-wrap svg { color: var(--bg); }
+.why-icon-wrap svg { width: 30px; height: 30px; color: var(--gold); transition: color 0.4s; }
+.why-title { font-family: 'Syne', sans-serif; font-size: 24px; letter-spacing: 3px; color: var(--cream); margin-bottom: 12px; font-weight: 500; }
+.why-desc { font-size: 14px; color: var(--text); line-height: 1.7; max-width: 260px; margin: 0 auto; }
+@media (max-width:900px){ .why-grid{grid-template-columns:1fr;gap:24px} }
+
+/* ===== SECTION 5: MADE IN INDIA ===== */
+.made-in { text-align: center; padding: 50px 5vw; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.flag-wrap { display: inline-flex; align-items: center; gap: 18px; margin-bottom: 8px; }
+.flag { width: 48px; height: 32px; border: 1px solid var(--border-light); display: flex; flex-direction: column; overflow: hidden; }
+.zentro-home .flag-band { flex: 1 1 auto; min-height: 10px; }
+.zentro-home .flag-band-1 { background: #FF9933 !important; }
+.zentro-home .flag-band-2 { background: #ffffff !important; display: flex; align-items: center; justify-content: center; }
+.zentro-home .flag-band-3 { background: #138808 !important; }
+.flag-chakra { width: 8px; height: 8px; border: 1.2px solid #000080; border-radius: 50%; position: relative; }
+.flag-chakra::before,.flag-chakra::after { content:''; position:absolute; background:#000080; top:50%; left:50%; }
+.flag-chakra::before { width:6.5px; height:1px; transform:translate(-50%,-50%); }
+.flag-chakra::after { width:1px; height:6.5px; transform:translate(-50%,-50%); }
+.made-in-title { font-family: 'Syne', sans-serif; font-size: 32px; letter-spacing: 4px; color: var(--cream); font-weight: 500; }
+.made-in-sub { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 13px; color: var(--gold); letter-spacing: 4px; margin-top: 10px; text-transform: uppercase; }
+
+/* ===== SECTION 6: BEST SELLERS ===== */
+.bestsellers { padding: 70px 0; overflow: hidden; }
+.bestsellers .section-header { padding: 0 5vw; }
+.marquee { display: flex; overflow: hidden; position: relative; padding: 16px 0; mask-image: linear-gradient(to right, transparent, #000 60px, #000 calc(100% - 60px), transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 60px, #000 calc(100% - 60px), transparent); }
+.zentro-home .marquee-track { display: flex; animation: marquee 24s linear infinite; flex-shrink: 0; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } } 100%{transform:translateX(calc(-50% - 13px))} }
+.zentro-home .bestseller-item { flex-shrink: 0; width: 260px; margin-right: 28px; text-align: center; text-decoration: none; color: inherit; display: block; box-sizing: border-box; }
+.zentro-home .bestseller-img { width: 260px; height: auto; aspect-ratio: 9 / 16; background: var(--bg-elev); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; transition: all 0.4s; overflow: hidden; box-sizing: border-box; }
+  .zentro-home .bestseller-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bestseller-item:hover .bestseller-img { border-color: var(--gold); transform: translateY(-5px); }
+.bestseller-img svg { width: 96px; height: 96px; color: var(--gold); opacity: 0.7; }
+.zentro-home .bestseller-name { font-family: 'Syne', sans-serif !important; font-size: 20px; letter-spacing: 0.5px; color: var(--cream) !important; margin-bottom: 5px; font-weight: 600; text-transform: none; -webkit-font-smoothing: antialiased; }
+.zentro-home .bestseller-price { font-size: 13px; color: var(--gold) !important; letter-spacing: 2px; font-weight: 600; }
+
+/* ===== SECTION 7: STATS ===== */
+.stats { padding: 64px 32px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stats-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; text-align: center; }
+.stat-num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(48px,6.5vw,84px); color: var(--gold); line-height: 1; margin-bottom: 12px; letter-spacing: -3px; }
+.stat-label { font-size: 11px; letter-spacing: 4px; color: var(--text); text-transform: uppercase; font-weight: 500; }
+@media (max-width:700px){ .stats-grid{grid-template-columns:1fr;gap:32px} }
+
+/* ===== SECTION 7B: SHOP DEALERS ===== */
+.dealers { padding: 56px 5vw 60px; border-bottom: 1px solid var(--border); text-align: center; }
+.dealers-eyebrow { font-size: 11px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; font-weight: 500; }
+.dealers-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(22px,2.4vw,32px); letter-spacing: 2px; text-transform: uppercase; color: var(--cream); margin: 0 0 32px; }
+.dealers-grid { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.dealer { flex: 0 1 370px; display: flex; align-items: center; gap: 16px; text-align: left; padding: 20px 24px; background: var(--bg-card); border: 1px solid var(--border); text-decoration: none; color: inherit; transition: border-color 0.4s ease, transform 0.4s ease; }
+a.dealer:hover { border-color: var(--gold); transform: translateY(-3px); }
+.dealer-pin { flex: 0 0 44px; width: 44px; height: 44px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.dealer-pin svg { width: 20px; height: 20px; color: var(--gold); }
+.dealer-name { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 600; color: var(--cream); line-height: 1.25; }
+.dealer-loc { font-size: 11px; letter-spacing: 2.5px; color: var(--text); text-transform: uppercase; margin-top: 5px; }
+.dealer-map { font-size: 10px; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; margin-top: 7px; }
+@media (max-width:700px){ .dealers{padding:44px 5vw 48px} .dealer{flex:1 1 100%} }
+
+/* ===== SECTION 8: TESTIMONIALS ===== */
+.testimonials-grid { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.testimonial { background: var(--bg-card); border: 1px solid var(--border); padding: 32px 28px; transition: all 0.4s; }
+.testimonial:hover { border-color: var(--gold); transform: translateY(-4px); }
+.testimonial-quote-mark { font-family: 'Syne', sans-serif; font-style: italic; font-size: 58px; color: var(--gold); line-height: 0; margin-top: 22px; display: block; height: 18px; }
+.testimonial-text { font-family: 'Syne', sans-serif; font-style: italic; font-size: 17px; line-height: 1.65; color: var(--cream); margin-bottom: 22px; }
+.testimonial-meta { display: flex; align-items: center; gap: 12px; }
+.testimonial-line { width: 20px; height: 1px; background: var(--gold); }
+.testimonial-author { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-weight: 600; }
+.testimonial-context { font-size: 11px; letter-spacing: 0.5px; color: var(--muted); margin-top: 3px; }
+@media (max-width:900px){ .testimonials-grid{grid-template-columns:1fr} }
+
+/* ===== SECTION 9: FOUNDER ===== */
+.founder { padding: 70px 5vw; background: #161618; }
+.founder-card { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 170px 1fr; gap: 44px; align-items: center; padding: 40px 44px; background: var(--bg-card); border: 1px solid var(--border); }
+.founder-avatar { width: 170px; height: 170px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; background: var(--bg-elev); position: relative; }
+.founder-avatar-initial { font-family: 'Syne', sans-serif; font-size: 64px; color: var(--gold); font-weight: 500; }
+.founder-avatar::after { content:''; position:absolute; inset:7px; border:1px solid var(--gold); border-radius:50%; opacity:0.3; }
+.founder-eyebrow { font-size: 11px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; font-weight: 500; }
+.founder-name { font-family: 'Syne', sans-serif; font-size: 34px; letter-spacing: 3px; color: var(--cream); margin-bottom: 18px; font-weight: 500; }
+.founder-quote { font-family: 'Syne', sans-serif; font-style: normal; font-weight: 400; font-size: 20px; line-height: 1.7; color: var(--text); }
+@media (max-width:800px){ .founder-card{grid-template-columns:1fr;text-align:center;gap:24px;padding:32px 24px} .founder-avatar{margin:0 auto} }
+
+/* ===== SECTION 10: CONTACT ===== */
+.contact { padding: 70px 5vw; text-align: center; }
+.contact-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(2,1fr); gap: 22px; }
+.contact-card { background: var(--bg-card); border: 1px solid var(--border); padding: 32px 22px; text-decoration: none; color: inherit; transition: all 0.4s; display: block; }
+.contact-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+.contact-icon { width: 42px; height: 42px; margin: 0 auto 16px; color: var(--gold); }
+.contact-label { font-size: 10px; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; font-weight: 500; }
+.contact-value { font-family: 'Syne', sans-serif; font-size: 21px; color: var(--cream); letter-spacing: 1px; font-weight: 500; }
+@media (max-width:600px){ .contact-grid{grid-template-columns:1fr} }
+
+/* ===== FOOTER ===== */
+.footer { background: #141416; padding: 56px 5vw 28px; border-top: 1px solid var(--border); }
+.footer-grid { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 44px; }
+.footer-brand-name { font-family: 'Syne', sans-serif; font-size: 24px; letter-spacing: 6px; color: var(--cream); margin-bottom: 10px; font-weight: 500; }
+.footer-tagline { font-family: 'Space Grotesk', sans-serif; font-weight: 300; color: var(--gold); font-size: 11px; letter-spacing: 4px; margin-bottom: 16px; text-transform: uppercase; }
+.footer-blurb { font-size: 13px; color: var(--text); line-height: 1.7; max-width: 300px; margin-bottom: 20px; }
+.footer-gstline { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; line-height: 1.8; }
+.footer-col h4 { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; font-weight: 600; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: var(--text); text-decoration: none; font-size: 13px; transition: color 0.3s, padding-left 0.3s; }
+.footer-col a:hover { color: var(--gold); padding-left: 4px; }
+.footer-bottom { max-width: 1500px; margin: 0 auto; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-copyright { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+.footer-social { display: flex; gap: 12px; }
+.footer-social a { width: 36px; height: 36px; border: 1px solid var(--border-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); transition: all 0.3s; }
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+.footer-social svg { width: 15px; height: 15px; }
+@media (max-width:900px){ .footer-grid{grid-template-columns:repeat(2,1fr);gap:32px} }
+@media (max-width:600px){ .footer-grid{grid-template-columns:1fr} .footer-bottom{flex-direction:column;text-align:center} }
+
+  /* Indian flag — gradient method (bulletproof) */
+  .flag-wrap { display: inline-flex; align-items: center; gap: 18px; margin-bottom: 8px; }
+  .flag-simple {
+    width: 48px; height: 32px; border: 1px solid var(--border-light);
+    background: linear-gradient(to bottom, #FF9933 0%, #FF9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%, #138808 100%) !important;
+    position: relative; display: inline-block; flex-shrink: 0;
+  }
+
+  .flag-chakra-svg {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 11px; height: 11px;
+  }
+  .flag-chakra-svg line { stroke: #000080; stroke-width: 0.5; }
+  .flag-chakra-svg circle { stroke: #000080; }
+
+  .flag-chakra-dot-UNUSED {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 9px; height: 9px; border: 1.4px solid #000080; border-radius: 50%;
+    box-sizing: border-box;
+  }
+  .flag-chakra-dot::before, .flag-chakra-dot::after {
+    content: ''; position: absolute; background: #000080; top: 50%; left: 50%;
+  }
+  .flag-chakra-dot::before { width: 7px; height: 1px; transform: translate(-50%,-50%); }
+  .flag-chakra-dot::after { width: 1px; height: 7px; transform: translate(-50%,-50%); }
+
+
+  /* Best sellers — kill Dawn link underline/colors */
+  .zentro-home .bestseller-item,
+  .zentro-home .bestseller-item:hover,
+  .zentro-home .bestseller-item:focus,
+  .zentro-home .bestseller-item *,
+  .zentro-home .bestseller-name,
+  .zentro-home .bestseller-price {
+    text-decoration: none !important;
+    box-shadow: none !important;
+    border-bottom: none !important;
+  }
+
+
+  /* Trust strip */
+  .zentro-home .trust-strip { max-width: 1500px; margin: 0 auto; padding: 6px 5vw 34px; display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .zentro-home .trust-item { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 16px 14px; border: 1px solid var(--border); background: var(--bg-card); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream); text-align: left; line-height: 1.4; }
+  .zentro-home .trust-item svg { width: 22px; height: 22px; color: var(--gold); flex-shrink: 0; }
+  @media (max-width: 900px) { .zentro-home .trust-strip { grid-template-columns: repeat(2,1fr); } .zentro-home .trust-item { font-size: 11px; letter-spacing: 1px; justify-content: flex-start; } }
+  /* Footer plain text item + WhatsApp chat button */
+  .zentro-home .footer-col li { color: var(--text); font-size: 13px; }
+  .zentro-home .wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 40; display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: #1a1a1c !important; padding: 13px 18px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; text-decoration: none !important; box-shadow: 0 6px 24px rgba(0,0,0,0.45); transition: background 0.3s, transform 0.3s; }
+  .zentro-home .wa-float:hover { background: var(--gold-bright); transform: translateY(-3px); }
+  .zentro-home .wa-float svg { width: 18px; height: 18px; }
+  @media (max-width: 600px) { .zentro-home .wa-float span { display: none; } .zentro-home .wa-float { padding: 14px; border-radius: 50%; right: 14px; bottom: 14px; } }
+
+</style>
+
+<div class="zentro-home">
+<!-- SECTION 1: HERO HEADER -->
+<section class="hero-header">
+  <div class="logo-wrap">
+    <svg class="zentro-logo" viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <line class="ray" x1="50" y1="2" x2="50" y2="10"/>
+      <line class="ray" x1="68" y1="6" x2="64" y2="14"/>
+      <line class="ray" x1="82" y1="14" x2="76" y2="20"/>
+      <line class="ray" x1="93" y1="28" x2="85" y2="30"/>
+      <line class="ray" x1="7" y1="28" x2="15" y2="30"/>
+      <line class="ray" x1="18" y1="14" x2="24" y2="20"/>
+      <line class="ray" x1="32" y1="6" x2="36" y2="14"/>
+      <path d="M 50 22 C 33 22, 28 32, 28 47 C 28 57, 32 65, 38 71 L 38 78 L 62 78 L 62 71 C 68 65, 72 57, 72 47 C 72 32, 67 22, 50 22 Z"/>
+      <path class="filament-z" d="M 40 36 L 60 36 L 40 60 L 60 60" stroke-width="5"/>
+      <line x1="38" y1="84" x2="62" y2="84" stroke-width="3.5"/>
+      <line x1="40" y1="90" x2="60" y2="90" stroke-width="3.5"/>
+      <line x1="42" y1="96" x2="58" y2="96" stroke-width="3.5"/>
+      <path d="M 46 100 Q 50 106 54 100" fill="currentColor" stroke="none"/>
+    </svg>
+    {%- assign bn = section.settings.brand_name -%}
+    {%- assign bn_first = bn | slice: 0 -%}
+    {%- assign bn_rest = bn | slice: 1, 100 -%}
+    <div class="brand-name"><span class="z-anim">{{ bn_first }}</span>{{ bn_rest }}<span class="reg">&reg;</span></div>
+  </div>
+  <div class="brand-slogan">{{ section.settings.slogan }}</div>
+  <div class="brand-divider"></div>
+</section>
+
+
+
+
+<!-- ===== HERO PRODUCT SLIDER ===== -->
+<section class="hero-slider-section reveal">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hs-track" id="hsTrack">
+      {%- assign slide_count = 0 -%}
+      {%- for block in section.blocks -%}{%- if block.type == 'slide' and block.settings.product != blank -%}{%- assign slide_count = slide_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+      {% if slide_count > 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' and block.settings.product != blank %}
+            {% assign p = block.settings.product %}
+            <a class="hs-slide" href="{{ p.url }}" {{ block.shopify_attributes }}>
+              {% if p.featured_image != blank %}<div class="hs-bg" style="background-image:url('{{ p.featured_image | image_url: width: 500 }}')"></div>{% endif %}
+              <div class="hs-inner">
+                <div class="hs-copy">
+                  <div class="hs-eyebrow">{% if p.type != blank %}{{ p.type | escape }} Collection{% else %}Zentro Works{% endif %}</div>
+                  <h2 class="hs-name">{{ p.title | escape }}</h2>
+                  <div class="hs-price">{% if p.price_varies %}<span class="hs-from">From</span>{% endif %}{{ p.price_min | money }}{% if p.compare_at_price_max > p.price_min %}<s>{{ p.compare_at_price_max | money }}</s><span class="hs-off">{{ p.compare_at_price_max | minus: p.price_min | times: 100 | divided_by: p.compare_at_price_max }}% OFF</span>{% endif %}</div>
+                  <span class="hs-cta">Shop now <span class="arrow">&rarr;</span></span>
+                </div>
+                <div class="hs-media">
+                  {% if p.featured_image != blank %}<img src="{{ p.featured_image | image_url: width: 900 }}" alt="{{ p.featured_image.alt | default: p.title | escape }}" width="{{ p.featured_image.width }}" height="{{ p.featured_image.height }}" {% if slide_seen %}loading="lazy"{% else %}fetchpriority="high"{% endif %}>{% else %}<div class="hs-ph"></div>{% endif %}
+                </div>
+              </div>
+            </a>
+            {%- assign slide_seen = true -%}
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="hs-slide"><div class="hs-ph" style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:13px;">Pick products in the slider blocks &rarr;</div></div>
+      {% endif %}
+    </div>
+    <button class="hs-arrow prev" id="hsPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18 L9 12 L15 6"/></svg></button>
+    <button class="hs-arrow next" id="hsNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6 L15 12 L9 18"/></svg></button>
+    <div class="hs-dots" id="hsDots"></div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust-strip reveal">
+  {%- assign t1 = section.settings.trust_1 -%}{%- assign t2 = section.settings.trust_2 -%}{%- assign t3 = section.settings.trust_3 -%}{%- assign t4 = section.settings.trust_4 -%}
+  {% if t1 != blank %}<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>{{ t1 }}</span></div>{% endif %}
+  {% if t2 != blank %}<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="10" width="16" height="11" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>{{ t2 }}</span></div>{% endif %}
+  {% if t3 != blank %}<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 3l4 4L8 20l-5 1 1-5L17 3z"/></svg><span>{{ t3 }}</span></div>{% endif %}
+  {% if t4 != blank %}<div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12"/><path d="M3 8l9-5 9 5M12 8v12"/></svg><span>{{ t4 }}</span></div>{% endif %}
+</section>
+
+<!-- SECTION 2: PRINTER + QUOTE -->
+<section class="printer-quote">
+  <div class="stage">
+    <div class="printer">
+      <svg viewBox="-50 -50 100 100">
+        <line class="pf" x1="-32" y1="32" x2="32" y2="32"/><line class="pf" x1="-36" y1="36" x2="36" y2="36"/><line class="pf" x1="-36" y1="36" x2="-32" y2="32"/><line class="pf" x1="36" y1="36" x2="32" y2="32"/><line class="pf thin" x1="-30" y1="34" x2="30" y2="34"/>
+        <line class="pf" x1="-36" y1="-40" x2="-36" y2="36"/><line class="pf" x1="36" y1="-40" x2="36" y2="36"/><line class="pf" x1="-38" y1="-40" x2="38" y2="-40"/>
+        <line class="pf thin" x1="-34" y1="-38" x2="34" y2="-38"/><line class="pf thin" x1="-34" y1="-42" x2="34" y2="-42"/>
+        <line class="pf thin" x1="-34" y1="-38" x2="-34" y2="34"/><line class="pf thin" x1="34" y1="-38" x2="34" y2="34"/>
+        <circle class="pf thin" cx="-30" cy="-44" r="3"/><circle class="pf thin" cx="-30" cy="-44" r="1"/>
+        <ellipse class="bl l1" cx="0" cy="30" rx="9" ry="1.2"/><ellipse class="bl l2" cx="0" cy="26" rx="11" ry="1.2"/><ellipse class="bl l3" cx="0" cy="22" rx="13" ry="1.2"/><ellipse class="bl l4" cx="0" cy="18" rx="15" ry="1.2"/><ellipse class="bl l5" cx="0" cy="14" rx="17" ry="1.2"/><ellipse class="bl l6" cx="0" cy="10" rx="18" ry="1.2"/><ellipse class="bl l7" cx="0" cy="6" rx="18" ry="1.2"/><ellipse class="bl l8" cx="0" cy="2" rx="17" ry="1.2"/><ellipse class="bl l9" cx="0" cy="-2" rx="15" ry="1.2"/><ellipse class="bl l10" cx="0" cy="-6" rx="13" ry="1.2"/><ellipse class="bl l11" cx="0" cy="-10" rx="11" ry="1.2"/><ellipse class="bl l12" cx="0" cy="-14" rx="10" ry="1.2"/><ellipse class="bl l13" cx="0" cy="-18" rx="10" ry="1.2"/>
+        <g class="ph">
+          <!-- Rectangular carriage block -->
+          <rect x="-5" y="-30" width="10" height="7" fill="none" stroke="#C9A961" stroke-width="0.6"/>
+          <!-- Clean V-shaped nozzle pointing down (connects to block) -->
+          <path d="M-4,-23 L0,-19 L4,-23" fill="none" stroke="#C9A961" stroke-width="0.6" stroke-linejoin="round"/>
+          <!-- Glowing nozzle tip -->
+          <circle class="ng" cx="0" cy="-19" r="0.9"/>
+        </g>
+      </svg>
+    </div>
+    <div class="status">PRINTING</div>
+  </div>
+  <div class="quote-block reveal-right">
+    <span class="quote-mark">&ldquo;</span>
+    <p class="quote-text">Personalized 3D printed products for the <em>Homes</em>, <em>Gifts</em> &amp; <em>Businesses</em>.</p>
+    <div class="quote-attribution"><div class="quote-attribution-line"></div><div class="quote-attribution-text">The Zentro Promise</div></div>
+  </div>
+</section>
+
+<!-- SECTION 3: PRODUCTS -->
+<section class="section reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Collections</div>
+    <h2 class="section-title">Explore Our Products</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="products-grid stagger{% unless section.settings.show_clonez %} cards-4{% endunless %}">
+    <a class="card" href="{{ section.settings.link_bloomz | default: '/collections/bloomz' }}"><div class="card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="16" r="2.5"/><ellipse cx="24" cy="10" rx="3" ry="4.5"/><ellipse cx="30" cy="13" rx="4.5" ry="3" transform="rotate(60 30 13)"/><ellipse cx="30" cy="19" rx="4.5" ry="3" transform="rotate(-60 30 19)"/><ellipse cx="18" cy="13" rx="4.5" ry="3" transform="rotate(-60 18 13)"/><ellipse cx="18" cy="19" rx="4.5" ry="3" transform="rotate(60 18 19)"/><path d="M24 18 V42"/><path d="M24 30 C 20 28, 16 32, 18 36"/></svg></div><h3 class="card-name">BloomZ</h3><p class="card-desc">Sculptural 3D-printed planters that elevate everyday greenery into statement pieces.</p><div class="card-cta">Shop <span class="arrow">&rarr;</span></div></a>
+    <a class="card" href="{{ section.settings.link_lampz | default: '/collections/lampz' }}"><div class="card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M18 6L30 6L34 22L14 22Z"/><path d="M24 22V36"/><path d="M20 40H28"/><circle cx="24" cy="38" r="2"/></svg></div><h3 class="card-name">LampZ</h3><p class="card-desc">Sculptural lighting designed from first principles &mdash; engineered for warmth and presence.</p><div class="card-cta">Shop <span class="arrow">&rarr;</span></div></a>
+    {% if section.settings.show_clonez %}<a class="card" href="{{ section.settings.link_clonez | default: '/products/custom-3d-avatar' }}"><div class="card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="18" r="7"/><path d="M12 42 C 12 32, 17 28, 24 28 C 31 28, 36 32, 36 42"/></svg></div><h3 class="card-name">CloneZ</h3><p class="card-desc">Upload your photo &mdash; receive a precision-printed 3D avatar of yourself or a loved one.</p><div class="card-cta">Upload <span class="arrow">&rarr;</span></div></a>{% endif %}
+    <a class="card" href="{{ section.settings.link_labz | default: '/pages/labz' }}"><div class="card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 6V20L12 38C10 42 12 44 16 44H32C36 44 38 42 36 38L28 20V6"/><line x1="18" y1="6" x2="30" y2="6"/><circle cx="22" cy="32" r="1.5" fill="currentColor"/><circle cx="26" cy="36" r="1" fill="currentColor"/></svg></div><h3 class="card-name">LabZ</h3><p class="card-desc">End-to-end industrial 3D printing for prototyping, manufacturing, and bespoke engineering.</p><div class="card-cta">Enquire <span class="arrow">&rarr;</span></div></a>
+    <a class="card" href="{{ section.settings.link_corporate | default: '/pages/labz' }}"><div class="card-icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="20" width="32" height="22"/><rect x="6" y="14" width="36" height="6"/><line x1="24" y1="14" x2="24" y2="42"/><path d="M24 14C20 14 17 11 17 8C17 6 18 5 20 5C22 5 24 8 24 14Z"/><path d="M24 14C28 14 31 11 31 8C31 6 30 5 28 5C26 5 24 8 24 14Z"/></svg></div><h3 class="card-name">Corporate Gifts</h3><p class="card-desc">Bespoke 3D-printed corporate gifting carried with your brand and your intention.</p><div class="card-cta">Enquire <span class="arrow">&rarr;</span></div></a>
+  </div>
+</section>
+
+<!-- SECTION 4: WHY -->
+<section class="why reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Difference</div>
+    <h2 class="section-title">Why Zentro Works?</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="why-grid stagger">
+    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="3.5"/><path d="M16 2 L16 6 M16 26 L16 30 M2 16 L6 16 M26 16 L30 16 M6 6 L9 9 M23 23 L26 26 M6 26 L9 23 M23 9 L26 6"/></svg></div><h3 class="why-title">Designed by Engineers</h3><p class="why-desc">Backed by years of expertise in additive manufacturing.</p></div>
+    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 28 C 8 24, 4 16, 8 8 C 16 4, 24 8, 28 16 C 24 24, 16 28, 16 28 Z"/><path d="M10 22 C 14 18, 18 14, 22 10"/></svg></div><h3 class="why-title">Sustainable Materials</h3><p class="why-desc">Eco-conscious PLA and premium materials.</p></div>
+    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 4 L24 8 L8 24 L4 20 Z"/><path d="M4 28 L8 24 M24 4 L28 8 M16 8 L18 10 M22 14 L24 16"/><circle cx="26" cy="6" r="1" fill="currentColor"/><circle cx="20" cy="10" r="0.8" fill="currentColor"/></svg></div><h3 class="why-title">Customization First</h3><p class="why-desc">Every product can be personalized to you.</p></div>
+  </div>
+</section>
+
+<!-- SECTION 5: MADE IN INDIA -->
+<section class="made-in reveal">
+  <div class="flag-wrap">
+    <div class="flag-simple"><svg class="flag-chakra-svg" viewBox="0 0 24 24" fill="none" stroke="#000080" stroke-width="0.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.6" fill="#000080" stroke="none"/><line x1="12" y1="12" x2="21.00" y2="12.00"/><line x1="12" y1="12" x2="20.69" y2="14.33"/><line x1="12" y1="12" x2="19.79" y2="16.50"/><line x1="12" y1="12" x2="18.36" y2="18.36"/><line x1="12" y1="12" x2="16.50" y2="19.79"/><line x1="12" y1="12" x2="14.33" y2="20.69"/><line x1="12" y1="12" x2="12.00" y2="21.00"/><line x1="12" y1="12" x2="9.67" y2="20.69"/><line x1="12" y1="12" x2="7.50" y2="19.79"/><line x1="12" y1="12" x2="5.64" y2="18.36"/><line x1="12" y1="12" x2="4.21" y2="16.50"/><line x1="12" y1="12" x2="3.31" y2="14.33"/><line x1="12" y1="12" x2="3.00" y2="12.00"/><line x1="12" y1="12" x2="3.31" y2="9.67"/><line x1="12" y1="12" x2="4.21" y2="7.50"/><line x1="12" y1="12" x2="5.64" y2="5.64"/><line x1="12" y1="12" x2="7.50" y2="4.21"/><line x1="12" y1="12" x2="9.67" y2="3.31"/><line x1="12" y1="12" x2="12.00" y2="3.00"/><line x1="12" y1="12" x2="14.33" y2="3.31"/><line x1="12" y1="12" x2="16.50" y2="4.21"/><line x1="12" y1="12" x2="18.36" y2="5.64"/><line x1="12" y1="12" x2="19.79" y2="7.50"/><line x1="12" y1="12" x2="20.69" y2="9.67"/></svg></div>
+    <h2 class="made-in-title">Made in India</h2>
+  </div>
+  <div class="made-in-sub">Locally designed and manufactured</div>
+</section>
+
+<!-- SECTION 6: BEST SELLERS (real products only) -->
+<section class="bestsellers reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">Customer Favorites</div>
+    <h2 class="section-title">Best Sellers</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      {% assign bscoll = section.settings.bestseller_collection %}
+      {% if bscoll != blank and bscoll.products_count > 0 %}
+        {% for i in (1..2) %}
+          {% for product in bscoll.products limit: 12 %}
+            <a class="bestseller-item" href="{{ product.url }}">
+              <div class="bestseller-img">{% if product.featured_image != blank %}<img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">{% endif %}</div>
+              <div class="bestseller-name">{{ product.title }}</div>
+              <div class="bestseller-price">{{ product.price | money }}</div>
+            </a>
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+        <div style="width:100%;text-align:center;padding:40px 5vw;color:var(--muted);font-family:'Space Grotesk',sans-serif;letter-spacing:2px;text-transform:uppercase;font-size:13px;">Select a collection in the section settings to show best sellers</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: STATS -->
+{% if section.settings.show_stats %}
+<section class="stats reveal">
+  <div class="stats-grid stagger">
+    <div><div class="stat-num" data-target="{{ section.settings.stat_1_number }}" data-suffix="+">0+</div><div class="stat-label">{{ section.settings.stat_1_label }}</div></div>
+    <div><div class="stat-num" data-target="{{ section.settings.stat_2_number }}" data-suffix="+">0+</div><div class="stat-label">{{ section.settings.stat_2_label }}</div></div>
+    <div><div class="stat-num" data-target="{{ section.settings.stat_3_number }}" data-suffix="+">0+</div><div class="stat-label">{{ section.settings.stat_3_label }}</div></div>
+  </div>
+</section>
+{% endif %}
+
+<!-- SECTION 7B: SHOP DEALERS (names and places come from the section settings) -->
+{%- assign dealer_count = 0 -%}
+{%- for i in (1..4) -%}
+  {%- assign dkey = 'dealer_' | append: i | append: '_name' -%}
+  {%- if section.settings[dkey] != blank -%}{%- assign dealer_count = dealer_count | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+{% if section.settings.show_dealers and dealer_count > 0 %}
+<section class="dealers reveal">
+  {% if section.settings.dealers_eyebrow != blank %}<div class="dealers-eyebrow">{{ section.settings.dealers_eyebrow | escape }}</div>{% endif %}
+  {% if section.settings.dealers_heading != blank %}<h2 class="dealers-title">{{ section.settings.dealers_heading | escape }}</h2>{% endif %}
+  <div class="dealers-grid stagger">
+    {%- for i in (1..4) -%}
+      {%- assign dkey = 'dealer_' | append: i | append: '_name' -%}
+      {%- assign lkey = 'dealer_' | append: i | append: '_location' -%}
+      {%- assign mkey = 'dealer_' | append: i | append: '_map' -%}
+      {%- assign dname = section.settings[dkey] -%}
+      {%- assign dloc = section.settings[lkey] -%}
+      {%- assign dmap = section.settings[mkey] -%}
+      {%- if dname != blank %}
+    {% if dmap != blank %}<a class="dealer" href="{{ dmap }}" target="_blank" rel="noopener">{% else %}<div class="dealer">{% endif %}
+      <div class="dealer-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg></div>
+      <div><div class="dealer-name">{{ dname | escape }}</div>{% if dloc != blank %}<div class="dealer-loc">{{ dloc | escape }}</div>{% endif %}{% if dmap != blank %}<div class="dealer-map">View on map &rarr;</div>{% endif %}</div>
+    {% if dmap != blank %}</a>{% else %}</div>{% endif %}
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- SECTION 8: TESTIMONIALS (only real reviews, added as "Customer review" blocks) -->
+{%- assign review_count = 0 -%}
+{%- for block in section.blocks -%}{%- if block.type == 'testimonial' and block.settings.quote != blank -%}{%- assign review_count = review_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+{% if review_count > 0 %}
+<section class="section reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">What People Say</div>
+    <h2 class="section-title">From Our Customers</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="testimonials-grid stagger">
+    {% for block in section.blocks %}
+      {% if block.type == 'testimonial' and block.settings.quote != blank %}
+        <div class="testimonial" {{ block.shopify_attributes }}><span class="testimonial-quote-mark">&ldquo;</span><p class="testimonial-text">{{ block.settings.quote | escape }}</p><div class="testimonial-meta"><div class="testimonial-line"></div><div><div class="testimonial-author">{{ block.settings.author | escape }}</div>{% if block.settings.context != blank %}<div class="testimonial-context">{{ block.settings.context | escape }}</div>{% endif %}</div></div></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- SECTION 9: FOUNDER -->
+<section class="founder reveal">
+  <div class="founder-card reveal-scale">
+    <div class="founder-avatar"><div class="founder-avatar-initial">N</div></div>
+    <div>
+      <div class="founder-eyebrow">~ The Founder ~</div>
+      <h2 class="founder-name">Nagarjun J</h2>
+      <p class="founder-quote">"Zentro Works bridges engineering precision with creative design &mdash; bringing advanced manufacturing to everyday products."</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: CONTACT -->
+<section class="contact reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">Get in Touch</div>
+    <h2 class="section-title">Contact Us</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="contact-grid stagger">
+    <a class="contact-card" href="tel:{{ section.settings.phone | remove: ' ' }}"><svg class="contact-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M14 8 L20 8 L23 18 L18 22 C 21 28, 24 31, 30 34 L 34 29 L 42 32 L 42 38 C 42 41, 39 44, 35 44 C 19 43, 6 30, 5 14 C 5 10, 8 7, 11 7 Z"/></svg><div class="contact-label">Phone</div><div class="contact-value">{{ section.settings.phone }}</div></a>
+    <a class="contact-card" href="mailto:{{ section.settings.email }}"><svg class="contact-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="6" y="12" width="36" height="24"/><path d="M6 12 L24 26 L42 12"/></svg><div class="contact-label">Email</div><div class="contact-value">{{ section.settings.email }}</div></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand-name">ZENTRO WORKS</div>
+      <div class="footer-tagline">Beyond the Ordinary</div>
+      <p class="footer-blurb">Personalized 3D printed products for homes, gifts &amp; businesses. Designed and manufactured in Coimbatore, India.</p>
+      <div class="footer-gstline">{% if section.settings.gstin != blank %}GSTIN: {{ section.settings.gstin }}<br>{% endif %}Tamil Nadu, India</div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        {% if section.settings.link_about != blank %}<li><a href="{{ section.settings.link_about }}">About Us</a></li>{% endif %}
+        <li><a href="{{ routes.all_products_collection_url }}">Shop All</a></li>
+        <li><a href="{{ routes.account_url }}">Track Order</a></li>
+        <li><a href="{{ section.settings.link_corporate | default: '/pages/labz' }}">Bulk Order</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Policies</h4>
+      <ul>
+        {% if shop.shipping_policy %}<li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>{% endif %}
+        {% if shop.refund_policy %}<li><a href="{{ shop.refund_policy.url }}">Refund Policy</a></li>{% endif %}
+        {% if shop.terms_of_service %}<li><a href="{{ shop.terms_of_service.url }}">Terms &amp; Conditions</a></li>{% endif %}
+        {% if shop.privacy_policy %}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{% endif %}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:{{ section.settings.phone | remove: ' ' }}">{{ section.settings.phone }}</a></li>
+        <li><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
+        <li>Coimbatore, Tamil Nadu</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">&copy; {{ 'now' | date: '%Y' }} Zentro Innoworks. All rights reserved.</div>
+    <div class="footer-social">
+      {% if section.settings.instagram != blank %}<a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg></a>{% endif %}
+      {% if section.settings.whatsapp != blank %}<a href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' | remove: '-' }}" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21 L4.5 16 C 3.5 14, 3 12, 3 10 C 3 5.5, 6.5 2, 11 2 C 15.5 2, 19 5.5, 19 10 C 19 14.5, 15.5 18, 11 18 C 9 18, 7 17.5, 5 16.5 L3 21 Z"/></svg></a>{% endif %}
+    </div>
+  </div>
+</footer>
+{% if section.settings.whatsapp != blank %}
+<a class="wa-float" href="https://wa.me/{{ section.settings.whatsapp | remove: ' ' | remove: '+' | remove: '-' }}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21 L4.5 16 C 3.5 14, 3 12, 3 10 C 3 5.5, 6.5 2, 11 2 C 15.5 2, 19 5.5, 19 10 C 19 14.5, 15.5 18, 11 18 C 9 18, 7 17.5, 5 16.5 L3 21 Z"/></svg>
+  <span>Chat with us</span>
+</a>
+{% endif %}
+</div>
+
+<script>
+(function(){
+  var root = document.currentScript ? document.currentScript.closest('.shopify-section') : document;
+  function q(s){ return (root||document).querySelectorAll(s); }
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  q('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger').forEach(function(el){ io.observe(el); });
+
+  // Parallax printer
+  var stage = (root||document).querySelector('.stage');
+  window.addEventListener('scroll', function(){ if(stage){ stage.style.transform='translateY('+(window.scrollY*0.04)+'px)'; } }, {passive:true});
+
+  // Count-up stats
+  var seen=false;
+  var statsSection=(root||document).querySelector('.stats');
+  if(statsSection){
+    var so=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting && !seen){ seen=true;
+          q('.stat-num').forEach(function(el){
+            var t=parseInt(el.getAttribute('data-target'),10)||0, sfx=el.getAttribute('data-suffix')||'', dur=1600, st=null;
+            function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); var ea=1-Math.pow(1-p,3); el.textContent=Math.floor(ea*t)+sfx; if(p<1)requestAnimationFrame(step); else el.textContent=t+sfx; }
+            requestAnimationFrame(step);
+          });
+        }
+      });
+    }, {threshold:0.4});
+    so.observe(statsSection);
+  }
+
+  // Hero slider
+  var track=(root||document).querySelector('#hsTrack');
+  if(track){
+    var slides=track.querySelectorAll('.hs-slide');
+    var dotsWrap=(root||document).querySelector('#hsDots');
+    var cur=0, timer=null, interval=(parseInt('{{ section.settings.slide_seconds }}',10)||3)*1000;
+    if(slides.length>0){
+      for(var i=0;i<slides.length;i++){ var d=document.createElement('button'); d.className='hs-dot'+(i===0?' active':''); d.setAttribute('data-i',i); d.addEventListener('click',function(e){e.preventDefault();go(parseInt(e.currentTarget.getAttribute('data-i'),10));restart();}); dotsWrap.appendChild(d); }
+      var dots=dotsWrap.querySelectorAll('.hs-dot');
+      function go(i){ cur=(i+slides.length)%slides.length; track.style.transform='translateX(-'+(cur*100)+'%)'; dots.forEach(function(dot,idx){dot.classList.toggle('active',idx===cur);}); }
+      function next(){go(cur+1);} function prev(){go(cur-1);}
+      var nb=(root||document).querySelector('#hsNext'), pb=(root||document).querySelector('#hsPrev');
+      if(nb)nb.addEventListener('click',function(e){e.preventDefault();next();restart();});
+      if(pb)pb.addEventListener('click',function(e){e.preventDefault();prev();restart();});
+      function startAuto(){ if(slides.length>1 && !timer){ timer=setInterval(next,interval); } }
+      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+      function restart(){ stopAuto(); startAuto(); }
+      // Kick off auto-advance immediately from slide 1
+      startAuto();
+      var el=(root||document).querySelector('#heroSlider');
+      if(el){
+        el.addEventListener('mouseenter',stopAuto);
+        el.addEventListener('mouseleave',startAuto);
+        var sx=0; el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+        el.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx; if(dx<-40){next();restart();} else if(dx>40){prev();restart();}},{passive:true});
+      }
+    }
+  }
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Zentro Homepage",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "ZENTRO WORKS"
+    },
+    {
+      "type": "text",
+      "id": "slogan",
+      "label": "Slogan",
+      "default": "Beyond the Ordinary"
+    },
+    {
+      "type": "header",
+      "content": "Hero Slider"
+    },
+    {
+      "type": "range",
+      "id": "slide_seconds",
+      "label": "Seconds per slide",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Best Sellers"
+    },
+    {
+      "type": "collection",
+      "id": "bestseller_collection",
+      "label": "Best sellers collection"
+    },
+    {
+      "type": "header",
+      "content": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "+91 93422 33076"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "sales@zentroworks.com"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "text",
+      "id": "gstin",
+      "label": "GSTIN",
+      "default": "33XXXXX0000X1ZX"
+    },
+    {
+      "type": "header",
+      "content": "Trust strip (under the slider)",
+      "info": "Leave a line empty to hide it. Only state what is true for your store."
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Line 1",
+      "default": "Made in India, Coimbatore"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Line 2",
+      "default": "Plant-based PLA material"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Line 3",
+      "default": "Made to order, personalised"
+    },
+    {
+      "type": "text",
+      "id": "trust_4",
+      "label": "Line 4",
+      "default": "Bulk and corporate orders"
+    },
+    {
+      "type": "header",
+      "content": "Category card links",
+      "info": "Leave empty to use the default page for each card."
+    },
+    {
+      "type": "url",
+      "id": "link_bloomz",
+      "label": "BloomZ link"
+    },
+    {
+      "type": "url",
+      "id": "link_lampz",
+      "label": "LampZ link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_clonez",
+      "label": "Show CloneZ card",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "link_clonez",
+      "label": "CloneZ link"
+    },
+    {
+      "type": "url",
+      "id": "link_labz",
+      "label": "LabZ / Bulk Order link"
+    },
+    {
+      "type": "url",
+      "id": "link_corporate",
+      "label": "Corporate Gifts link"
+    },
+    {
+      "type": "header",
+      "content": "Stats",
+      "info": "Use your real numbers."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show stats row",
+      "default": true
+    },
+    {
+      "type": "number",
+      "id": "stat_1_number",
+      "label": "Stat 1 number",
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 label",
+      "default": "Prints Delivered"
+    },
+    {
+      "type": "number",
+      "id": "stat_2_number",
+      "label": "Stat 2 number",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 label",
+      "default": "Custom Designs"
+    },
+    {
+      "type": "number",
+      "id": "stat_3_number",
+      "label": "Stat 3 number",
+      "default": 100
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 label",
+      "default": "Happy Customers"
+    },
+    {
+      "type": "header",
+      "content": "Shop dealers",
+      "info": "Shown below the stats. Leave a name empty to hide that dealer."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dealers",
+      "label": "Show shop dealers",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "dealers_eyebrow",
+      "label": "Small line above the heading",
+      "default": "Also available in store"
+    },
+    {
+      "type": "text",
+      "id": "dealers_heading",
+      "label": "Heading",
+      "default": "Our Shop Dealers"
+    },
+    {
+      "type": "text",
+      "id": "dealer_1_name",
+      "label": "Dealer 1 name",
+      "default": "Surabi Nursery"
+    },
+    {
+      "type": "text",
+      "id": "dealer_1_location",
+      "label": "Dealer 1 area and city",
+      "default": "Civil Aerodrome, Coimbatore"
+    },
+    {
+      "type": "url",
+      "id": "dealer_1_map",
+      "label": "Dealer 1 Google Maps link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "dealer_2_name",
+      "label": "Dealer 2 name",
+      "default": "Plantz Nursery"
+    },
+    {
+      "type": "text",
+      "id": "dealer_2_location",
+      "label": "Dealer 2 area and city",
+      "default": "Neelambur, Coimbatore"
+    },
+    {
+      "type": "url",
+      "id": "dealer_2_map",
+      "label": "Dealer 2 Google Maps link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "dealer_3_name",
+      "label": "Dealer 3 name"
+    },
+    {
+      "type": "text",
+      "id": "dealer_3_location",
+      "label": "Dealer 3 area and city"
+    },
+    {
+      "type": "url",
+      "id": "dealer_3_map",
+      "label": "Dealer 3 Google Maps link (optional)"
+    },
+    {
+      "type": "text",
+      "id": "dealer_4_name",
+      "label": "Dealer 4 name"
+    },
+    {
+      "type": "text",
+      "id": "dealer_4_location",
+      "label": "Dealer 4 area and city"
+    },
+    {
+      "type": "url",
+      "id": "dealer_4_map",
+      "label": "Dealer 4 Google Maps link (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Footer links and chat"
+    },
+    {
+      "type": "url",
+      "id": "link_about",
+      "label": "About Us page"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp number",
+      "info": "With country code, e.g. 919342233076. Shows a chat button. Leave empty to hide."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slider product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Customer review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "What the customer said",
+          "info": "Paste the customer's own words, with their permission."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Customer name"
+        },
+        {
+          "type": "text",
+          "id": "context",
+          "label": "Product and city (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Zentro Homepage",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
