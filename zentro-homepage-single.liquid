@@ -93,6 +93,7 @@
 }
 .hs-track { display: flex; transition: transform 0.8s cubic-bezier(0.22,1,0.36,1); }
 .hero-slider { --hs-h: clamp(460px, 68vh, 680px); }
+.hero-slider.hs-wide { --hs-h: clamp(400px, min(40vw, 76vh), 700px); }
 .hs-slide {
   min-width: 100%; flex: 0 0 100%; max-width: 100%;
   position: relative;
@@ -138,6 +139,22 @@
 .hs-dots { position: absolute; bottom: 22px; right: 30px; display: flex; gap: 9px; z-index: 5; }
 .hs-dot { width: 30px; height: 3px; background: rgba(232,228,217,0.28); cursor: pointer; border: none; padding: 0; transition: all 0.3s; }
 .hs-dot.active { background: var(--gold); }
+
+/* Slides with a wide hero image: copy on the left 30%, photo fills the right 70% */
+.hs-slide.hs-has-hero { background: radial-gradient(120% 140% at 0% 50%, #2b2b2e 0%, var(--bg-elev) 62%); }
+.hs-has-hero .hs-inner { max-width: none; padding: 0; grid-template-columns: 30% 70%; gap: 0; }
+.hs-has-hero .hs-copy { max-width: none; padding: 0 2.6vw 0 4.6vw; }
+.zentro-home .hs-has-hero .hs-name { font-size: clamp(28px, 2.9vw, 52px); }
+.hs-has-hero .hs-media { position: relative; height: var(--hs-h); padding: 0; overflow: hidden; display: block; }
+.hs-has-hero .hs-media img { position: relative; z-index: 1; width: 100%; height: 100%; max-width: none; box-shadow: none; }
+.hs-has-hero .hs-media img.hs-fit-cover { object-fit: cover; }
+.hs-has-hero .hs-media img.hs-fit-contain { object-fit: contain; }
+.hs-media-bg { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(30px) brightness(0.42) saturate(1.1); }
+.hs-has-hero .hs-media::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 9%; z-index: 2; pointer-events: none; background: linear-gradient(90deg, rgba(35,35,37,0.9), rgba(35,35,37,0)); }
+.hs-wide .hs-dots { padding: 9px 12px; background: rgba(26,26,28,0.5); bottom: 18px; right: 22px; }
+.hs-wide .hs-arrow { top: auto; bottom: 22px; transform: none; }
+.hs-wide .hs-arrow.prev { left: 4.6vw; }
+.hs-wide .hs-arrow.next { left: calc(4.6vw + 56px); right: auto; }
 @media (max-width: 900px) {
   .hs-slide { height: auto; }
   .hs-inner { grid-template-columns: 1fr; grid-template-rows: auto auto; padding: 22px 6vw 62px; gap: 18px; text-align: center; }
@@ -150,6 +167,15 @@
   .hs-cta { padding: 13px 24px; font-size: 11px; letter-spacing: 3px; }
   .hs-arrow { top: 28vh; }
   .hs-dots { right: 50%; transform: translateX(50%); bottom: 24px; }
+  .hs-has-hero .hs-inner { grid-template-columns: 1fr; padding: 0 0 62px; gap: 18px; }
+  .hs-has-hero .hs-copy { padding: 0 6vw; }
+  .hs-has-hero .hs-media { order: -1; height: auto; aspect-ratio: 1.15; }
+  .hs-has-hero .hs-media::after { display: none; }
+  .hero-slider.hs-wide { --hs-h: auto; }
+  .hs-wide .hs-arrow { top: 41vw; bottom: auto; transform: translateY(-50%); }
+  .hs-wide .hs-arrow.prev { left: 10px; }
+  .hs-wide .hs-arrow.next { left: auto; right: 10px; }
+  .hs-wide .hs-dots { right: 50%; transform: translateX(50%); bottom: 22px; }
 }
 
 /* ===== SECTION 2: PRINTER + QUOTE ===== */
@@ -410,25 +436,26 @@ a.dealer:hover { border-color: var(--gold); transform: translateY(-3px); }
 
 <!-- ===== HERO PRODUCT SLIDER ===== -->
 <section class="hero-slider-section reveal">
-  <div class="hero-slider" id="heroSlider">
+  {%- assign slide_count = 0 -%}{%- assign any_hero = false -%}
+  {%- for block in section.blocks -%}{%- if block.type == 'slide' and block.settings.product != blank -%}{%- assign slide_count = slide_count | plus: 1 -%}{%- if block.settings.hero_image != blank -%}{%- assign any_hero = true -%}{%- endif -%}{%- endif -%}{%- endfor -%}
+  <div class="hero-slider{% if any_hero %} hs-wide{% endif %}" id="heroSlider">
     <div class="hs-track" id="hsTrack">
-      {%- assign slide_count = 0 -%}
-      {%- for block in section.blocks -%}{%- if block.type == 'slide' and block.settings.product != blank -%}{%- assign slide_count = slide_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
       {% if slide_count > 0 %}
         {% for block in section.blocks %}
           {% if block.type == 'slide' and block.settings.product != blank %}
-            {% assign p = block.settings.product %}
-            <a class="hs-slide" href="{{ p.url }}" {{ block.shopify_attributes }}>
-              {% if p.featured_image != blank %}<div class="hs-bg" style="background-image:url('{{ p.featured_image | image_url: width: 500 }}')"></div>{% endif %}
+            {% assign p = block.settings.product %}{% assign hero = block.settings.hero_image %}
+            <a class="hs-slide{% if hero != blank %} hs-has-hero{% endif %}" href="{{ p.url }}" {{ block.shopify_attributes }}>
+              {% if hero == blank and p.featured_image != blank %}<div class="hs-bg" style="background-image:url('{{ p.featured_image | image_url: width: 500 }}')"></div>{% endif %}
               <div class="hs-inner">
                 <div class="hs-copy">
                   <div class="hs-eyebrow">{% if p.type != blank %}{{ p.type | escape }} Collection{% else %}Zentro Works{% endif %}</div>
                   <h2 class="hs-name">{{ p.title | escape }}</h2>
-                  <div class="hs-price">{% if p.price_varies %}<span class="hs-from">From</span>{% endif %}{{ p.price_min | money }}{% if p.compare_at_price_max > p.price_min %}<s>{{ p.compare_at_price_max | money }}</s><span class="hs-off">{{ p.compare_at_price_max | minus: p.price_min | times: 100 | divided_by: p.compare_at_price_max }}% OFF</span>{% endif %}</div>
+                  <div class="hs-price">{% if p.price_varies %}<span class="hs-from">From</span>{% endif %}{{ p.price_min | money }}{% if p.compare_at_price_min > p.price_min %}<s>{{ p.compare_at_price_min | money }}</s><span class="hs-off">{{ p.compare_at_price_min | minus: p.price_min | times: 100 | divided_by: p.compare_at_price_min }}% OFF</span>{% endif %}</div>
                   <span class="hs-cta">Shop now <span class="arrow">&rarr;</span></span>
                 </div>
                 <div class="hs-media">
-                  {% if p.featured_image != blank %}<img src="{{ p.featured_image | image_url: width: 900 }}" alt="{{ p.featured_image.alt | default: p.title | escape }}" width="{{ p.featured_image.width }}" height="{{ p.featured_image.height }}" {% if slide_seen %}loading="lazy"{% else %}fetchpriority="high"{% endif %}>{% else %}<div class="hs-ph"></div>{% endif %}
+                  {% if hero != blank %}{% assign hfit = block.settings.hero_fit | default: 'cover' %}{% if hfit == 'contain' %}<div class="hs-media-bg" style="background-image:url('{{ hero | image_url: width: 400 }}')"></div>{% endif %}<img class="hs-fit-{{ hfit }}" style="object-position: {{ block.settings.hero_position | default: 'center' }}" src="{{ hero | image_url: width: 1400 }}" srcset="{{ hero | image_url: width: 700 }} 700w, {{ hero | image_url: width: 1000 }} 1000w, {{ hero | image_url: width: 1400 }} 1400w, {{ hero | image_url: width: 1800 }} 1800w" sizes="(max-width: 900px) 94vw, 66vw" alt="{{ hero.alt | default: p.title | escape }}" width="{{ hero.width }}" height="{{ hero.height }}" {% if slide_seen %}loading="lazy"{% else %}fetchpriority="high"{% endif %}>
+                  {% elsif p.featured_image != blank %}<img src="{{ p.featured_image | image_url: width: 900 }}" alt="{{ p.featured_image.alt | default: p.title | escape }}" width="{{ p.featured_image.width }}" height="{{ p.featured_image.height }}" {% if slide_seen %}loading="lazy"{% else %}fetchpriority="high"{% endif %}>{% else %}<div class="hs-ph"></div>{% endif %}
                 </div>
               </div>
             </a>
@@ -500,29 +527,6 @@ a.dealer:hover { border-color: var(--gold); transform: translateY(-3px); }
   </div>
 </section>
 
-<!-- SECTION 4: WHY -->
-<section class="why reveal">
-  <div class="section-header">
-    <div class="section-eyebrow">Our Difference</div>
-    <h2 class="section-title">Why Zentro Works?</h2>
-    <div class="section-divider"></div>
-  </div>
-  <div class="why-grid stagger">
-    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="3.5"/><path d="M16 2 L16 6 M16 26 L16 30 M2 16 L6 16 M26 16 L30 16 M6 6 L9 9 M23 23 L26 26 M6 26 L9 23 M23 9 L26 6"/></svg></div><h3 class="why-title">Designed by Engineers</h3><p class="why-desc">Backed by years of expertise in additive manufacturing.</p></div>
-    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 28 C 8 24, 4 16, 8 8 C 16 4, 24 8, 28 16 C 24 24, 16 28, 16 28 Z"/><path d="M10 22 C 14 18, 18 14, 22 10"/></svg></div><h3 class="why-title">Sustainable Materials</h3><p class="why-desc">Eco-conscious PLA and premium materials.</p></div>
-    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 4 L24 8 L8 24 L4 20 Z"/><path d="M4 28 L8 24 M24 4 L28 8 M16 8 L18 10 M22 14 L24 16"/><circle cx="26" cy="6" r="1" fill="currentColor"/><circle cx="20" cy="10" r="0.8" fill="currentColor"/></svg></div><h3 class="why-title">Customization First</h3><p class="why-desc">Every product can be personalized to you.</p></div>
-  </div>
-</section>
-
-<!-- SECTION 5: MADE IN INDIA -->
-<section class="made-in reveal">
-  <div class="flag-wrap">
-    <div class="flag-simple"><svg class="flag-chakra-svg" viewBox="0 0 24 24" fill="none" stroke="#000080" stroke-width="0.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.6" fill="#000080" stroke="none"/><line x1="12" y1="12" x2="21.00" y2="12.00"/><line x1="12" y1="12" x2="20.69" y2="14.33"/><line x1="12" y1="12" x2="19.79" y2="16.50"/><line x1="12" y1="12" x2="18.36" y2="18.36"/><line x1="12" y1="12" x2="16.50" y2="19.79"/><line x1="12" y1="12" x2="14.33" y2="20.69"/><line x1="12" y1="12" x2="12.00" y2="21.00"/><line x1="12" y1="12" x2="9.67" y2="20.69"/><line x1="12" y1="12" x2="7.50" y2="19.79"/><line x1="12" y1="12" x2="5.64" y2="18.36"/><line x1="12" y1="12" x2="4.21" y2="16.50"/><line x1="12" y1="12" x2="3.31" y2="14.33"/><line x1="12" y1="12" x2="3.00" y2="12.00"/><line x1="12" y1="12" x2="3.31" y2="9.67"/><line x1="12" y1="12" x2="4.21" y2="7.50"/><line x1="12" y1="12" x2="5.64" y2="5.64"/><line x1="12" y1="12" x2="7.50" y2="4.21"/><line x1="12" y1="12" x2="9.67" y2="3.31"/><line x1="12" y1="12" x2="12.00" y2="3.00"/><line x1="12" y1="12" x2="14.33" y2="3.31"/><line x1="12" y1="12" x2="16.50" y2="4.21"/><line x1="12" y1="12" x2="18.36" y2="5.64"/><line x1="12" y1="12" x2="19.79" y2="7.50"/><line x1="12" y1="12" x2="20.69" y2="9.67"/></svg></div>
-    <h2 class="made-in-title">Made in India</h2>
-  </div>
-  <div class="made-in-sub">Locally designed and manufactured</div>
-</section>
-
 <!-- SECTION 6: BEST SELLERS (real products only) -->
 <section class="bestsellers reveal">
   <div class="section-header">
@@ -548,6 +552,29 @@ a.dealer:hover { border-color: var(--gold); transform: translateY(-3px); }
       {% endif %}
     </div>
   </div>
+</section>
+
+<!-- SECTION 4: WHY -->
+<section class="why reveal">
+  <div class="section-header">
+    <div class="section-eyebrow">Our Difference</div>
+    <h2 class="section-title">Why Zentro Works?</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="why-grid stagger">
+    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="16" cy="16" r="3.5"/><path d="M16 2 L16 6 M16 26 L16 30 M2 16 L6 16 M26 16 L30 16 M6 6 L9 9 M23 23 L26 26 M6 26 L9 23 M23 9 L26 6"/></svg></div><h3 class="why-title">Designed by Engineers</h3><p class="why-desc">Backed by years of expertise in additive manufacturing.</p></div>
+    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 28 C 8 24, 4 16, 8 8 C 16 4, 24 8, 28 16 C 24 24, 16 28, 16 28 Z"/><path d="M10 22 C 14 18, 18 14, 22 10"/></svg></div><h3 class="why-title">Sustainable Materials</h3><p class="why-desc">Eco-conscious PLA and premium materials.</p></div>
+    <div class="why-card"><div class="why-icon-wrap"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 4 L24 8 L8 24 L4 20 Z"/><path d="M4 28 L8 24 M24 4 L28 8 M16 8 L18 10 M22 14 L24 16"/><circle cx="26" cy="6" r="1" fill="currentColor"/><circle cx="20" cy="10" r="0.8" fill="currentColor"/></svg></div><h3 class="why-title">Customization First</h3><p class="why-desc">Every product can be personalized to you.</p></div>
+  </div>
+</section>
+
+<!-- SECTION 5: MADE IN INDIA -->
+<section class="made-in reveal">
+  <div class="flag-wrap">
+    <div class="flag-simple"><svg class="flag-chakra-svg" viewBox="0 0 24 24" fill="none" stroke="#000080" stroke-width="0.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.6" fill="#000080" stroke="none"/><line x1="12" y1="12" x2="21.00" y2="12.00"/><line x1="12" y1="12" x2="20.69" y2="14.33"/><line x1="12" y1="12" x2="19.79" y2="16.50"/><line x1="12" y1="12" x2="18.36" y2="18.36"/><line x1="12" y1="12" x2="16.50" y2="19.79"/><line x1="12" y1="12" x2="14.33" y2="20.69"/><line x1="12" y1="12" x2="12.00" y2="21.00"/><line x1="12" y1="12" x2="9.67" y2="20.69"/><line x1="12" y1="12" x2="7.50" y2="19.79"/><line x1="12" y1="12" x2="5.64" y2="18.36"/><line x1="12" y1="12" x2="4.21" y2="16.50"/><line x1="12" y1="12" x2="3.31" y2="14.33"/><line x1="12" y1="12" x2="3.00" y2="12.00"/><line x1="12" y1="12" x2="3.31" y2="9.67"/><line x1="12" y1="12" x2="4.21" y2="7.50"/><line x1="12" y1="12" x2="5.64" y2="5.64"/><line x1="12" y1="12" x2="7.50" y2="4.21"/><line x1="12" y1="12" x2="9.67" y2="3.31"/><line x1="12" y1="12" x2="12.00" y2="3.00"/><line x1="12" y1="12" x2="14.33" y2="3.31"/><line x1="12" y1="12" x2="16.50" y2="4.21"/><line x1="12" y1="12" x2="18.36" y2="5.64"/><line x1="12" y1="12" x2="19.79" y2="7.50"/><line x1="12" y1="12" x2="20.69" y2="9.67"/></svg></div>
+    <h2 class="made-in-title">Made in India</h2>
+  </div>
+  <div class="made-in-sub">Locally designed and manufactured</div>
 </section>
 
 <!-- SECTION 7: STATS -->
@@ -1048,6 +1075,33 @@ a.dealer:hover { border-color: var(--gold); transform: translateY(-3px); }
           "type": "product",
           "id": "product",
           "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "hero_image",
+          "label": "Wide slider photo",
+          "info": "Landscape photo shown across 70% of the slide. Leave empty to use the product's main photo."
+        },
+        {
+          "type": "select",
+          "id": "hero_fit",
+          "label": "Photo fit",
+          "options": [
+            { "value": "cover", "label": "Fill the space" },
+            { "value": "contain", "label": "Show the whole photo" }
+          ],
+          "default": "cover"
+        },
+        {
+          "type": "select",
+          "id": "hero_position",
+          "label": "Keep in view when trimmed",
+          "options": [
+            { "value": "center", "label": "Centre" },
+            { "value": "center bottom", "label": "Bottom (keeps planters whole)" },
+            { "value": "center top", "label": "Top" }
+          ],
+          "default": "center"
         }
       ]
     },
